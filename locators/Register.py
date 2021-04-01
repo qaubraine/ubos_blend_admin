@@ -15,4 +15,4 @@ class Register:
 
 
     class app_name:
-        app_name = {'css': '#sv31gdeub2 > div > div > div > div > span'}
+        app_name = {'css': '#root > div:nth-child(3) > div:nth-child(2) > div > div.sc-bwcZQD.eAnozt > span'}
