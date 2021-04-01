@@ -1,5 +1,5 @@
 from selenium.common.exceptions import NoSuchElementException
-from locators import Login, Register
+from locators import Login, Admin
 from .BasePage import BasePage
 from time import sleep
 
@@ -21,8 +21,8 @@ class LoginPage(BasePage):
         self._click(Login.go_to_app.launch_button)
         return self
 
-    def check_app_name(self):
-        assert 'קטלוג הטבות' in self._get_element_text(Register.app_name.app_name), 'The APP name is not displayed'
+    def check_custom_text_widget(self):
+        assert 'קטלוג הטבות' in self._get_element_text(Admin.custom_text_widget.custom_text_widget_benefits), 'The custom text wiget is not displayed'
         return self
 
     def login_user_github(self, email, password):

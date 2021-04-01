@@ -1,32 +1,28 @@
 class Admin:
-    class canvas_widgets_from_orders_page:
-        custom_button_widget_subscriptions = {'css': 'div.appsmith_widget_05zt0tvvz9.button-class2 button'}
-
-    class canvas_widgets_from_subscription_page:
-        custom_button_widget_orders = {'css': 'div.appsmith_widget_aqy7miecaj.button-class1 button'}
 
     class custom_text_widget:
-        custom_text_widget_orders = {'css': 'div.t--widget-textwidget.title span'}
-        custom_text_widget_subscriptions = {'css': 'div.appsmith_widget_88p2jhtjnr.t--widget-textwidget span'}
+        custom_text_widget_benefits = {'css': '#sv31gdeub2 > div > div > div > div > span'}
 
-    class order:
-        button_order_details = {'css': '#tablenq2fwu0mxu > div.tableWrap > div > div.tbody > div:nth-child(1) > div:nth-child(6) > div > div > button'}
+    class benefits:
+        button_go_to_request_benefits = {'css': 'div.appsmith_widget_4a9y4psuf6 > div > div > div > button '}
 
-        year = {'css': 'div.current_year input[type=text].bp3-input'}
+        class create_benefits_form:
+            frame = {'css': '#ypwf54pmlj > div > iframe'}
+            cost_field = {'css': '#rwnnvc1988 > div > div > div > div > span > span > div > div.bp3-input-group > input'}
+            stock_field = {'css': '#soal0zld7r > div > div > div > div > span > span > div > div.bp3-input-group > input'}
+            description_field = {'css': '#xy6f5xbkt0 > div > div > div > div > span > span > textarea'}
+            name_field = {'css': '#zqexxn7cj3 > div > div > div > div > span > span > div > input'}
+            image_field = {'css': '#vzfuvnom0z > div > div > div > div > span > span > div > input'}
+            select_image = {'css': '#jpdxcutlnb > div > div > div > div > div > div'}
+            select_status_benefit = {'css': '#jd65wx8ygi > div > div > div > div > span > span > div > button'}
+            status_active = {'css': 'body > div.bp3-portal > div > div > div > div > div > ul > li:nth-child(2) > a > div'}
+            status_no_active = {'css': 'body > div.bp3-portal > div > div > div > div > div > ul > li:nth-child(3) > a > div'}
+            save_benefit_button = {'css': '#v71w1afbsq > div > div > div > button'}
 
-        iframe_orders = {'css': '#ajwj6freuo > div > iframe'}
+        class benefits_filter:
+            search_button = {'css': '#13j2a85xwa button'}
+            name_field = {'css': '#1759k9xl1t input'}
+            status_field = {'css': '#0r94qytdct button'}
 
-        button_notes = {'css': 'div.appsmith_widget_qd1jinmvq3 div.CUSTOM_BUTTON_WIDGET button'}
-
-        notes = {'css': 'div.CUSTOM_TEXT_WIDGET span'}
-
-    class subscription:
-        button_subscription_details = {'css': 'div.appsmith_widget_nq2fwu0mxu button.sc-exqJjn'}
-
-        iframe_subscriptions = {'css': '#dcbtln449t > div > iframe'}
-
-        year = {'css': 'div.appsmith_widget_q0x13uts4a input[type=text].bp3-input'}
-
-        button_notes = {'css': 'div.appsmith_widget_ey59sz12md div.CUSTOM_BUTTON_WIDGET button'}
-
-        notes = {'css': 'div.CUSTOM_TEXT_WIDGET span'}
+    class request_benefits:
+        pass
