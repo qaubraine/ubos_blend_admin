@@ -8,7 +8,8 @@ def test_open_home_page(browser):
         .check_custom_text_widget_benefits()
 
 
-def test_create_new_benefit(browser):
+@pytest.mark.parametrize('execution_number', range(1))
+def test_create_new_benefit(browser, execution_number, current_time):
     AdminPage(browser) \
         .open_admin_page(browser) \
         .create_new_benefit(cost=100, stock=50, description="Lorem Ipsum is simply dummy text of the printing and "
@@ -22,74 +23,11 @@ def test_create_new_benefit(browser):
                                                             "Letraset sheets containing Lorem Ipsum passages, "
                                                             "and more recently with desktop publishing software like "
                                                             "Aldus PageMaker including versions of Lorem Ipsum.",
-                            name='TADIRAN SUPREME 777-999')
+                            name=current_time + '+' + str(execution_number), image_name='example_image.png')
 
-# @pytest.mark.parametrize('execution_number', range(1))
-# def test_go_to_orders_page(browser, execution_number):
-#     AdminPage(browser) \
-#         .open_admin_page(browser) \
-#         .open_page_subscriptions() \
-#         .open_page_orders() \
-#         .check_custom_text_widget_orders()
-#
-#
-# def test_display_processing_orders(browser):
-#     AdminPage(browser) \
-#         .open_admin_page(browser)
-#     SearchFilter(browser) \
-#         .display_processing_order()
-#
-#
-# def test_display_completed_orders(browser):
-#     AdminPage(browser) \
-#         .open_admin_page(browser)
-#     SearchFilter(browser) \
-#         .display_completed_order()
-#
-#
-# def test_display_pending_orders(browser):
-#     AdminPage(browser) \
-#         .open_admin_page(browser)
-#     SearchFilter(browser) \
-#         .display_pending_order()
-#
-#
-# def test_display_failed_orders(browser):
-#     AdminPage(browser) \
-#         .open_admin_page(browser)
-#     SearchFilter(browser) \
-#         .display_failed_order()
-#
-#
-# def test_display_on_hold_orders(browser):
-#     AdminPage(browser) \
-#         .open_admin_page(browser)
-#     SearchFilter(browser) \
-#         .display_on_hold_order()
-#
-#
-# def test_search_order_by_id(browser):
-#     AdminPage(browser) \
-#         .open_admin_page(browser)
-#     SearchFilter(browser) \
-#         .search_order_by_id(id_order='11')
-#
-#
-# def test_go_to_next_and_return_previous_page(browser):
-#     AdminPage(browser) \
-#         .open_admin_page(browser)
-#     SearchFilter(browser) \
-#         .go_to_next_previous_page(name_attribute='value')
-#
-#
-# def test_open_details_order(browser):
-#     AdminPage(browser) \
-#         .open_admin_page(browser) \
-#         .open_details_order(value='value')
-#
-#
-# def test_open_details_subscription(browser):
-#     AdminPage(browser) \
-#         .open_admin_page(browser) \
-#         .open_page_subscriptions() \
-#         .open_details_subscription(value='value')
+
+def test_delete_last_benefit(browser):
+    AdminPage(browser) \
+        .open_admin_page(browser) \
+        .delete_benefit()
+

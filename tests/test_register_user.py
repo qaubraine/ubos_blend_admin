@@ -9,5 +9,4 @@ def test_register_user(browser, emails):
         .fill_register_form(first_name='Anatolii', last_name='Olesh', email=emails,
                             password='Qatest1!') \
         .check_app_name()
-    """"saving cookies in the file 'cookies.pkl' for further authorization"""
-    pickle.dump(browser.get_cookies(), open('cookies.pkl', 'wb'))
+

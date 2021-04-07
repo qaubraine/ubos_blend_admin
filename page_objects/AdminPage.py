@@ -6,6 +6,7 @@ import pickle
 
 class AdminPage(BasePage):
 
+
     def open_admin_page(self, browser):
         """adding cookies for authorization from the cookie.pkl file"""
         cookies = pickle.load(open("cookies.pkl", "rb"))
@@ -21,21 +22,31 @@ class AdminPage(BasePage):
         sleep(1)
         return self
 
-    def create_new_benefit(self, cost, stock, description, name):
+    def create_new_benefit(self, cost, stock, description, name, image_name):
         self._click(Admin.benefits.button_go_to_request_benefits)
-        self._switch_to_frame(Admin.benefits.create_benefits_form.frame)
-        print('passed')
-        self._click(Admin.benefits.create_benefits_form.cost_field)
-        self._input(Admin.benefits.create_benefits_form.cost_field, cost)
-        self._click(Admin.benefits.create_benefits_form.stock_field)
-        self._input(Admin.benefits.create_benefits_form.stock_field, stock)
-        self._click(Admin.benefits.create_benefits_form.description_field)
-        self._input(Admin.benefits.create_benefits_form.description_field, description)
-        self._click(Admin.benefits.create_benefits_form.name_field)
-        self._input(Admin.benefits.create_benefits_form.name_field, name)
+        self._switch_to_frame(Admin.benefits.create_benefit_form.frame)
+        self._click(Admin.benefits.create_benefit_form.cost_field)
+        self._input(Admin.benefits.create_benefit_form.cost_field, cost)
+        self._click(Admin.benefits.create_benefit_form.stock_field)
+        self._input(Admin.benefits.create_benefit_form.stock_field, stock)
+        self._click(Admin.benefits.create_benefit_form.description_field)
+        self._input(Admin.benefits.create_benefit_form.description_field, description)
+        self._click(Admin.benefits.create_benefit_form.name_field)
+        self._input(Admin.benefits.create_benefit_form.name_field, name)
+        self._click(Admin.benefits.create_benefit_form.image_field)
+        self._input(Admin.benefits.create_benefit_form.image_field, image_name)
+        self._click(Admin.benefits.create_benefit_form.select_status_benefit)
+        self._click(Admin.benefits.create_benefit_form.status_active)
+        sleep(1)
+        self._click(Admin.benefits.create_benefit_form.save_benefit_button)
+        sleep(1)
+        print(self._get_element_text(Admin.benefits.create_benefit_form.product_created_msg))
+        assert 'Product Created' in self._get_element_text(Admin.benefits.create_benefit_form.product_created_msg), \
+            'message "Product Created" is not displayed '
+        self._switch_to_default()
+        self._click(Admin.benefits.create_benefit_form.close_benefits_form)
 
-        self._click(Admin.benefits.create_benefits_form.select_status_benefit)
-        self._click(Admin.benefits.create_benefits_form.status_active)
-        self._click(Admin.benefits.create_benefits_form.save_benefit_button)
+    def delete_benefit(self):
+        self._click_elements(Admin.benefits.preview_benefit_form, index=-1)
+        sleep(10)
 
-        sleep(5)

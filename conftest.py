@@ -51,3 +51,8 @@ def browser(request, url):
 def emails():
     emails = 'qaubraine+' + str(time.time()) + '@gmail.com'
     return emails
+
+@pytest.fixture()
+def current_time():
+    current_time = str(time.time())
+    return current_time

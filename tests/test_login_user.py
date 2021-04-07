@@ -1,5 +1,6 @@
 from page_objects import LoginPage
 import pytest
+import pickle
 
 
 @pytest.mark.parametrize('execution_number', range(1))
@@ -8,6 +9,8 @@ def test_login_user(browser, execution_number):
         .login_user(email='qaubraine@gmail.com', password='Qatest1!') \
         .go_to_app() \
         .check_custom_text_widget()
+    """"saving cookies in the file 'cookies.pkl' for further authorization"""
+    pickle.dump(browser.get_cookies(), open('cookies.pkl', 'wb'))
 
 
 def test_login_user_github(browser):

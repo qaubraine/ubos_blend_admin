@@ -43,6 +43,9 @@ class BasePage:
     def _switch_to_frame(self, selector):
         self.driver.switch_to.frame(self.__element(selector))
 
+    def _switch_to_default(self):
+        return self.driver.switch_to.default_content()
+
     def _select_dropdown(self, selector, value):
         select = Select(self.__element(selector))
         return select.select_by_value(value)
@@ -57,9 +60,7 @@ class BasePage:
     def _get_attribute_value(self, name_attribute, selector):
         return self.__element(selector).get_attribute(name_attribute)
 
-
-
-################################################################################
+    ################################################################################
 
     def __elements(self, selector: dict, index: int, link_text: str = None):
         by = None
