@@ -2,32 +2,93 @@ from page_objects import AdminPage, SearchFilter
 import pytest
 
 
-def test_open_home_page(browser):
-    AdminPage(browser) \
-        .open_admin_page(browser) \
-        .check_custom_text_widget_benefits()
-
-
 @pytest.mark.parametrize('execution_number', range(1))
-def test_create_new_benefit(browser, execution_number, current_time):
+def test_open_home_page(browser, execution_number):
     AdminPage(browser) \
         .open_admin_page(browser) \
-        .create_new_benefit(cost=100, stock=50, description="Lorem Ipsum is simply dummy text of the printing and "
-                                                            "typesetting industry. Lorem Ipsum has been the "
-                                                            "industry's standard dummy text ever since the 1500s, "
-                                                            "when an unknown printer took a galley of type and "
-                                                            "scrambled it to make a type specimen book. It has "
-                                                            "survived not only five centuries, but also the leap into "
-                                                            "electronic typesetting, remaining essentially unchanged. "
-                                                            "It was popularised in the 1960s with the release of "
-                                                            "Letraset sheets containing Lorem Ipsum passages, "
-                                                            "and more recently with desktop publishing software like "
-                                                            "Aldus PageMaker including versions of Lorem Ipsum.",
-                            name=current_time + '+' + str(execution_number), image_name='example_image.png')
+        .check_custom_text_widget_ubos()
 
 
-def test_delete_last_benefit(browser):
+def test_go_to_next_and_return_previous_page(browser):
+    AdminPage(browser) \
+        .open_admin_page(browser)
+    SearchFilter(browser) \
+        .go_to_next_previous_page(name_attribute='value')
+
+
+def test_search_product_by_name(browser):
+    AdminPage(browser) \
+        .open_admin_page(browser)
+    SearchFilter(browser) \
+        .input_product_name(product_name='test') \
+        .click_submit_button() \
+        .check_name_found_product()
+
+
+def test_search_product_by_sku(browser):
+    AdminPage(browser) \
+        .open_admin_page(browser)
+    SearchFilter(browser) \
+        .input_product_sku(product_sku='123') \
+        .click_submit_button() \
+        .check_name_found_product()
+
+
+def test_open_create_product_form(browser):
     AdminPage(browser) \
         .open_admin_page(browser) \
-        .delete_benefit()
+        .open_create_product_form()
 
+
+def test_edit_product(browser):
+    AdminPage(browser) \
+        .open_admin_page(browser)
+    SearchFilter(browser) \
+        .input_product_sku(product_sku='123') \
+        .click_submit_button() \
+        .check_name_found_product()
+    AdminPage(browser) \
+        .open_edit_form()
+
+
+def test_change_status_product(browser):
+    AdminPage(browser) \
+        .open_admin_page(browser)
+    SearchFilter(browser) \
+        .input_product_sku(product_sku='123') \
+        .click_submit_button() \
+        .check_name_found_product()
+    AdminPage(browser) \
+        .change_status_product_activity()
+
+
+def test_upload_image_product(browser):
+    AdminPage(browser) \
+        .open_admin_page(browser)
+    SearchFilter(browser) \
+        .input_product_sku(product_sku='123') \
+        .click_submit_button() \
+        .check_name_found_product()
+    AdminPage(browser) \
+        .upload_image(path='C:\\Users\\qaubr\\image.png')
+
+
+def test_select_image_product(browser):
+    AdminPage(browser) \
+        .open_admin_page(browser)
+    SearchFilter(browser) \
+        .input_product_sku(product_sku='123') \
+        .click_submit_button() \
+        .check_name_found_product()
+    AdminPage(browser) \
+        .select_image()
+
+def test_upload_bar_code_product(browser):
+    AdminPage(browser) \
+        .open_admin_page(browser)
+    SearchFilter(browser) \
+        .input_product_sku(product_sku='123') \
+        .click_submit_button() \
+        .check_name_found_product()
+    AdminPage(browser) \
+        .upload_bar_code(path='C:\\Users\\qaubr\\bar_code.png')

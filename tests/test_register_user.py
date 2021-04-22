@@ -1,7 +1,8 @@
 from page_objects import RegisterPage
-import pickle
+import pytest
 
 
+@pytest.mark.skip
 def test_register_user(browser, emails):
     RegisterPage(browser) \
         .open_login_page() \

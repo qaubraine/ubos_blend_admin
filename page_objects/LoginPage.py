@@ -22,7 +22,7 @@ class LoginPage(BasePage):
         return self
 
     def check_custom_text_widget(self):
-        assert 'קטלוג הטבות' in self._get_element_text(Admin.custom_text_widget.custom_text_widget_benefits), 'The custom text wiget is not displayed'
+        assert 'קטלוג טמפו' in self._get_element_text(Admin.custom_text_widget.custom_text_widget_ubos), 'The custom text wiget is not displayed'
         return self
 
     def login_user_github(self, email, password):

@@ -31,5 +31,5 @@ class RegisterPage(BasePage):
         return self
 
     def check_app_name(self):
-        assert 'AdminBenefitrs' in self._get_element_text(Register.app_name.app_name), 'the widget name is not displayed'
+        assert 'Blend_Catalog' in self._get_element_text(Register.app_name.app_name), 'the widget name is not displayed'
         return self

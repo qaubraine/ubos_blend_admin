@@ -24,5 +24,5 @@ class Login:
         autorize_spel = {'css': '#js-oauth-authorize-btn'}
 
     class go_to_app:
-        select_app = {'css': '#root > div:nth-child(3) > div:nth-child(2) > div'}
-        launch_button = {'css': '#root > div:nth-child(3) > div:nth-child(2) > div div.overlay'}
+        select_app = {'css': '#root > div:nth-child(3) > div:nth-child(2) > div > div'}
+        launch_button = {'css': '#root > div:nth-child(3) > div:nth-child(2) > div > div div.overlay'}

@@ -23,8 +23,8 @@ class BasePage:
             selector = selector['xpath']
         return self.driver.find_element(by, selector)
 
-    def _click(self, selector):
-        self.__element(selector).click()
+    def _click(self, selector, link_text=None):
+        self.__element(selector, link_text).click()
 
     def _input(self, selector, value):
         element = self.__element(selector)
@@ -74,6 +74,19 @@ class BasePage:
             by = By.XPATH
             selector = selector['xpath']
         return self.driver.find_elements(by, selector)[index]
+
+    def _find_elements(self, selector: dict, link_text: str = None):
+        by = None
+        if link_text:
+            by = By.LINK_TEXT
+
+        elif 'css' in selector.keys():
+            by = By.CSS_SELECTOR
+            selector = selector['css']
+        elif 'xpath' in selector.keys():
+            by = By.XPATH
+            selector = selector['xpath']
+        return self.driver.find_elements(by, selector)
 
     def _click_elements(self, selector, index=0):
         self.__elements(selector, index).click()

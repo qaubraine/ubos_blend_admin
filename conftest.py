@@ -5,7 +5,7 @@ from selenium import webdriver
 
 def pytest_addoption(parser):
     parser.addoption("--browser", "-B", action="store", default="chrome", help="choose your browser")
-    parser.addoption("--url", "-U", action="store", default="https://app.ubos.tech/", help="choose your url")
+    parser.addoption("--url", "-U", action="store", default="https://ubos.blend-dev.com/", help="choose your url")
     parser.addoption("--headless", action="store", default="true", help="Is headless driver? tru/false")
 
 
