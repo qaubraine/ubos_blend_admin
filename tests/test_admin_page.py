@@ -70,7 +70,8 @@ def test_upload_image_product(browser):
         .click_submit_button() \
         .check_name_found_product()
     AdminPage(browser) \
-        .upload_image(path='C:\\Users\\qaubr\\image.png')
+        .upload_image(path='C:\\Users\\qaubr\\image.png') \
+        .upload_image(path='C:\\Users\\qaubr\\bar_code.png')
 
 
 def test_select_image_product(browser):
@@ -81,7 +82,18 @@ def test_select_image_product(browser):
         .click_submit_button() \
         .check_name_found_product()
     AdminPage(browser) \
-        .select_image()
+        .select_image(value='value')
+
+
+def test_delete_images(browser):
+    AdminPage(browser) \
+        .open_admin_page(browser)
+    SearchFilter(browser) \
+        .input_product_sku(product_sku='123') \
+        .click_submit_button() \
+        .check_name_found_product()
+    AdminPage(browser) \
+        .delete_images()
 
 def test_upload_bar_code_product(browser):
     AdminPage(browser) \
@@ -91,4 +103,27 @@ def test_upload_bar_code_product(browser):
         .click_submit_button() \
         .check_name_found_product()
     AdminPage(browser) \
-        .upload_bar_code(path='C:\\Users\\qaubr\\bar_code.png')
+        .upload_bar_code(path='C:\\Users\\qaubr\\bar_code.png') \
+        .upload_image(path='C:\\Users\\qaubr\\image.png')
+
+
+def test_select_bar_code_product(browser):
+    AdminPage(browser) \
+        .open_admin_page(browser)
+    SearchFilter(browser) \
+        .input_product_sku(product_sku='123') \
+        .click_submit_button() \
+        .check_name_found_product()
+    AdminPage(browser) \
+        .select_bar_code(value='value')
+
+
+def test_delete_bar_code_product(browser):
+    AdminPage(browser) \
+        .open_admin_page(browser)
+    SearchFilter(browser) \
+        .input_product_sku(product_sku='123') \
+        .click_submit_button() \
+        .check_name_found_product()
+    AdminPage(browser) \
+        .delete_bar_code()

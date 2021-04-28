@@ -23,6 +23,9 @@ class BasePage:
             selector = selector['xpath']
         return self.driver.find_element(by, selector)
 
+    def _hover(self, selector):
+        ActionChains(self.driver).move_to_element(self.__element(selector)).perform()
+
     def _click(self, selector, link_text=None):
         self.__element(selector, link_text).click()
 
@@ -31,14 +34,15 @@ class BasePage:
         element.clear()
         element.send_keys(value)
 
-    def _wait_for_visible(self, selector, link_text=None, wait=10):
-        return WebDriverWait(self.driver, wait).until(EC.visibility_of(self.__element(selector, link_text)))
+    def _select_dropdown(self, selector, value):
+        select = Select(self.__element(selector))
+        return select.select_by_value(value)
 
     def _get_element_text(self, selector):
         return self.__element(selector).text
 
-    def _hover(self, selector):
-        ActionChains(self.driver).move_to_element(self.__element(selector)).perform()
+    def _get_attribute_value(self, name_attribute, selector):
+        return self.__element(selector).get_attribute(name_attribute)
 
     def _switch_to_frame(self, selector):
         self.driver.switch_to.frame(self.__element(selector))
@@ -46,19 +50,40 @@ class BasePage:
     def _switch_to_default(self):
         return self.driver.switch_to.default_content()
 
-    def _select_dropdown(self, selector, value):
-        select = Select(self.__element(selector))
-        return select.select_by_value(value)
-
-    def _wait_for_clickable(self, selector, link_text=None, wait=10):
-        return WebDriverWait(self.driver, wait).until(EC.element_to_be_clickable(self.__element(selector, link_text)))
-
-    def _wait_to_be_available_frame(self, selector, link_text=None, wait=10):
+    def _wait_to_be_available_frame(self, selector: dict, wait=10):
+        by = None
+        if 'css' in selector.keys():
+            by = By.CSS_SELECTOR
+            selector = selector['css']
+        elif 'xpath' in selector.keys():
+            by = By.XPATH
+            selector = selector['xpath']
         return WebDriverWait(self.driver, wait).until(
-            EC.frame_to_be_available_and_switch_to_it(self.__element(selector, link_text)))
+            EC.frame_to_be_available_and_switch_to_it((by, selector)))
 
-    def _get_attribute_value(self, name_attribute, selector):
-        return self.__element(selector).get_attribute(name_attribute)
+    def _wait_for_clickable(self, selector: dict, wait=10):
+        by = None
+        if 'css' in selector.keys():
+            by = By.CSS_SELECTOR
+            selector = selector['css']
+        elif 'xpath' in selector.keys():
+            by = By.XPATH
+            selector = selector['xpath']
+        return WebDriverWait(self.driver, wait).until(EC.element_to_be_clickable((by, selector)))
+
+    def _wait_for_visibility_of(self, selector, link_text=None, wait=10):
+        return WebDriverWait(self.driver, wait).until(EC.visibility_of(self.__element(selector, link_text)))
+
+    def _wait_for_visibility_of_element(self, selector: dict, wait=10):
+        by = None
+        if 'css' in selector.keys():
+            by = By.CSS_SELECTOR
+            selector = selector['css']
+        elif 'xpath' in selector.keys():
+            by = By.XPATH
+            selector = selector['xpath']
+        return WebDriverWait(self.driver, wait).until(EC.visibility_of_element_located((by, selector)))
+
 
     ################################################################################
 
@@ -79,7 +104,6 @@ class BasePage:
         by = None
         if link_text:
             by = By.LINK_TEXT
-
         elif 'css' in selector.keys():
             by = By.CSS_SELECTOR
             selector = selector['css']
@@ -87,6 +111,16 @@ class BasePage:
             by = By.XPATH
             selector = selector['xpath']
         return self.driver.find_elements(by, selector)
+
+    def _wait_for_visibility_of_all_elements(self, selector: dict, wait=10):
+        by = None
+        if 'css' in selector.keys():
+            by = By.CSS_SELECTOR
+            selector = selector['css']
+        elif 'xpath' in selector.keys():
+            by = By.XPATH
+            selector = selector['xpath']
+        return WebDriverWait(self.driver, wait).until(EC.visibility_of_all_elements_located((by, selector)))
 
     def _click_elements(self, selector, index=0):
         self.__elements(selector, index).click()

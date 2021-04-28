@@ -6,7 +6,7 @@ from time import sleep
 class RegisterPage(BasePage):
 
     def open_login_page(self):
-        sleep(1)
+        self._wait_for_visibility_of_element(Register.go_to_login_user_page.select_user_account)
         self._click(Register.go_to_login_user_page.select_user_account)
         return self
 
@@ -16,6 +16,7 @@ class RegisterPage(BasePage):
         return self
 
     def fill_register_form(self, first_name, last_name, email, password):
+        self._wait_for_clickable(Register.register_form.first_name)
         self._click(Register.register_form.first_name)
         self._input(Register.register_form.first_name, first_name)
         self._click(Register.register_form.last_name)
@@ -31,5 +32,6 @@ class RegisterPage(BasePage):
         return self
 
     def check_app_name(self):
+        self._wait_for_visibility_of_element(Register.app_name.app_name)
         assert 'Blend_Catalog' in self._get_element_text(Register.app_name.app_name), 'the widget name is not displayed'
         return self

@@ -35,7 +35,7 @@ def browser(request, url):
     else:
         raise Exception(f"{request.param} is not supported!")
 
-    driver.implicitly_wait(10)
+    # driver.implicitly_wait(10)
     request.addfinalizer(driver.close)
     driver.set_window_size(1920, 1080)
 
