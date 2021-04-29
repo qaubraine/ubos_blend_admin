@@ -2,33 +2,39 @@ from locators import Admin
 from .BasePage import BasePage
 from time import sleep
 import pickle
+import allure
 
 
 class AdminPage(BasePage):
 
     def open_admin_page(self, browser):
-        """adding cookies for authorization from the cookie.pkl file"""
-        cookies = pickle.load(open("cookies.pkl", "rb"))
-        for cookie in cookies:
-            browser.add_cookie(cookie)
-        """"go to the admin page. url + path"""
-        browser.open(path='applications/605362b1cf12932736ef39c8/pages/605362b1cf12932736ef39ca')
-        return self
+        with allure.step("Opening Admin Page"):
+            """adding cookies for authorization from the cookie.pkl file"""
+            cookies = pickle.load(open("cookies.pkl", "rb"))
+            for cookie in cookies:
+                browser.add_cookie(cookie)
+            """"go to the admin page. url + path"""
+            browser.open(path='applications/605362b1cf12932736ef39c8/pages/605362b1cf12932736ef39ca')
+            return self
 
     def check_custom_text_widget_ubos(self):
-        self._wait_for_visibility_of_element(Admin.custom_text_widget.custom_text_widget_ubos)
-        assert 'קטלוג טמפו' in self._get_element_text(Admin.custom_text_widget.custom_text_widget_ubos), \
-            'The custom text widget is not displayed'
-        return self
+        with allure.step("Checking the correct display of the product name 'קטלוג טמפו' "):
+            self._wait_for_visibility_of_element(Admin.custom_text_widget.custom_text_widget_ubos)
+            assert 'קטלוג טמפו' in self._get_element_text(Admin.custom_text_widget.custom_text_widget_ubos), \
+                'The custom text widget is not displayed'
+            return self
 
     def open_create_product_form(self):
-        self._wait_for_clickable(Admin.create_product_button)
-        self._click(Admin.create_product_button)
-        self._wait_to_be_available_frame(Admin.iframe_create_product_form)
-        self._wait_for_visibility_of_element(Admin.create_product_form.text_widget_create_form)
-        assert 'Create Product' in self._get_element_text(Admin.create_product_form.text_widget_create_form), \
-            'The create product form is not displayed'
-        return self
+        with allure.step("Opening Create Product Form"):
+            self._wait_for_clickable(Admin.create_product_button)
+            self._click(Admin.create_product_button)
+        with allure.step("Switch to iframe Create Product Form"):
+            self._wait_to_be_available_frame(Admin.iframe_create_product_form)
+        with allure.step("Checking Name Form"):
+            self._wait_for_visibility_of_element(Admin.create_product_form.text_widget_create_form)
+            assert 'Create Product' in self._get_element_text(Admin.create_product_form.text_widget_create_form), \
+                'The create product form is not displayed'
+            return self
 
     def open_edit_form(self):
         self._wait_for_clickable(Admin.edit_form_button)

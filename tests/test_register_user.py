@@ -1,7 +1,11 @@
 from page_objects import RegisterPage
 import pytest
+import allure
 
 
+@allure.severity(allure.severity_level.CRITICAL)
+@allure.feature('Register User')
+@allure.story('Реєстрація користувача, використовуючи email')
 @pytest.mark.skip
 def test_register_user(browser, emails):
     RegisterPage(browser) \
