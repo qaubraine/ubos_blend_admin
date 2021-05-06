@@ -5,7 +5,7 @@ import allure
 
 @allure.severity(allure.severity_level.CRITICAL)
 @allure.feature('Register User')
-@allure.story('Реєстрація користувача, використовуючи email')
+@allure.story('Registration User with email')
 @pytest.mark.skip
 def test_register_user(browser, emails):
     RegisterPage(browser) \
