@@ -20,6 +20,7 @@ class LoginPage(BasePage):
             self._wait_for_visibility_of_element(Admin.custom_text_widget.blend_catalog)
             assert 'Blend_Catalog' in self._get_element_text(Admin.custom_text_widget.blend_catalog), \
                 'Blend_catalog  widget is not presented '
+            print('You have registered using your email')
             return self
 
     def go_to_app(self):

@@ -4,6 +4,8 @@ import pickle
 import allure
 
 
+@allure.issue('https://ubraine.atlassian.net/secure/RapidBoard.jspa?rapidView=21&projectKey=BLEN', 'Task in Jira')
+@allure.link('https://www.screencast.com/t/ejfJaNJuagJ', "LINK", 'Video on what it looks like')
 @allure.severity(allure.severity_level.CRITICAL)
 @allure.feature('Autorization')
 @allure.story('with email')
@@ -17,6 +19,8 @@ def test_login_user(browser, execution_number):
     pickle.dump(browser.get_cookies(), open('cookies.pkl', 'wb'))
 
 
+@allure.issue('https://ubraine.atlassian.net/secure/RapidBoard.jspa?rapidView=21&projectKey=BLEN', 'Task in Jira')
+@allure.link('https://www.screencast.com/t/TiMV0wrXgcPY', "LINK", 'Video on what it looks like')
 @allure.severity(allure.severity_level.CRITICAL)
 @allure.feature('Autorization')
 @allure.story('with gitHub')

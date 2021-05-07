@@ -32,12 +32,14 @@ class AdminPage(BasePage):
             self._wait_to_be_available_frame(Admin.iframe_create_product_form)
         with allure.step("Check what the name of the form is 'Create Product'"):
             self._wait_for_visibility_of_element(Admin.create_product_form.text_widget_create_form)
+            # here are a mistake => Product1 should be Product
             assert 'Create Product1' in self._get_element_text(Admin.create_product_form.text_widget_create_form), \
                 'The create product form is not displayed'
             return self
 
     def open_edit_form(self):
         with allure.step("Opening Edit Product Form"):
+            # here are a mistake button1 should be 'button'
             self._wait_for_clickable(Admin.edit_form_button1)
             self._click(Admin.edit_form_button)
         with allure.step("Switch to iframe Create Product Form"):
