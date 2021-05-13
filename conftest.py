@@ -1,6 +1,9 @@
+import os
+
 import pytest
 import time
 from selenium import webdriver
+import allure
 
 
 def pytest_addoption(parser):
@@ -56,3 +59,32 @@ def emails():
 def current_time():
     current_time = str(time.time())
     return current_time
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    rep = outcome.get_result()
+    if rep.when == 'call' and rep.failed:
+        mode = 'a' if os.path.exists('failures') else 'w'
+        try:
+            with open('failures', mode) as f:
+                if 'browser' in item.fixturenames:  # assume this is fixture with webdriver
+                    web_driver = item.funcargs['browser']
+                else:
+                    print('Fail to take screen-shot')
+                    return
+            allure.attach(
+                web_driver.get_screenshot_as_png(),
+                name='Screenshot of the error page',
+                attachment_type=allure.attachment_type.PNG
+            )
+            # if web_driver.browser_name != FIREFOX_BROWSER_NAME:
+            #     # Firefox do not support js logs: https://github.com/SeleniumHQ/selenium/issues/2972
+            #     allure.attach(
+            #         '\n'.join(web_driver.get_log('browser')),
+            #         name='js console log:',
+            #         attachment_type=allure.attachment_type.TEXT,
+            #     )
+
+        except Exception as e:
+            print('Fail to take screen-shot: {}'.format(e))

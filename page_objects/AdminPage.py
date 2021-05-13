@@ -8,7 +8,7 @@ import allure
 class AdminPage(BasePage):
 
     def open_admin_page(self, browser):
-        with allure.step("Opening Admin Page"):
+        with allure.step("Open Admin Page"):
             """adding cookies for authorization from the cookie.pkl file"""
             cookies = pickle.load(open("cookies.pkl", "rb"))
             for cookie in cookies:
@@ -33,7 +33,7 @@ class AdminPage(BasePage):
         with allure.step("Check what the name of the form is 'Create Product'"):
             self._wait_for_visibility_of_element(Admin.create_product_form.text_widget_create_form)
             # here are a mistake => Product1 should be Product
-            assert 'Create Product1' in self._get_element_text(Admin.create_product_form.text_widget_create_form), \
+            assert 'Create Product' in self._get_element_text(Admin.create_product_form.text_widget_create_form), \
                 'The create product form is not displayed'
             return self
 
