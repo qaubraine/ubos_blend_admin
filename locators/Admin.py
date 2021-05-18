@@ -3,7 +3,7 @@ class Admin:
     name_found_product = {'css': '#tablewdw2uan7zx > div.tableWrap > div > div.tbody.no-scroll > div:nth-child(1) > div:nth-child(2) > div'}
     create_product_button = {'css': 'div.appsmith_widget_1k94pt83a6 > div > div > div > button'}
     iframe_create_product_form = {'css': '#h5gqytssfl > div > iframe'}
-    edit_form_button = {'css': '#tablewdw2uan7zx > div.tableWrap > div > div.tbody > div:nth-child(1) > div:nth-child(11) > div > div > button'}
+    edit_form_button = {'css': '#tablewdw2uan7zx > div.tableWrap > div > div.tbody > div:nth-child(1) > div:nth-child(13) > div > div > button'}
     iframe_edit_product_form = {'css': '#gy0nb83vpl > div > iframe'}
 
 
